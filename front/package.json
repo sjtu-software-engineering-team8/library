@@ -1,0 +1,48 @@
+{
+    "name": "show",
+    "version": "1.0.0",
+    "description": "666",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "webpack-dev-server --open --port 3000 --hot"
+    },
+    "author": "Duncan",
+    "license": "ISC",
+    "dependencies": {
+        "@babel/preset-env": "^7.8.7",
+        "@babel/runtime": "^7.8.7",
+        "babel-loader": "^8.0.6",
+        "babel-preset-mobx": "^2.0.0",
+        "bootstrap": "^4.4.1",
+        "css-loader": "^3.4.2",
+        "file-loader": "^5.1.0",
+        "html-webpack-plugin": "^3.2.0",
+        "jquery": "^3.4.1",
+        "less": "^3.11.1",
+        "less-loader": "^5.0.0",
+        "mint-ui": "^2.2.13",
+        "node-sass": "^4.13.1",
+        "popper.js": "^1.16.0",
+        "sass-loader": "^8.0.2",
+        "style-loader": "^1.1.3",
+        "url-loader": "^3.0.0",
+        "vue": "^2.6.11",
+        "vue-loader": "^15.9.0",
+        "vue-resource": "^1.5.1",
+        "vue-router": "^3.1.6",
+        "vue-template-compiler": "^2.6.11",
+        "vuex": "^3.1.3",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.8.7",
+        "@babel/plugin-transform-runtime": "^7.8.3",
+        "webpack": "^4.42.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/awsl1784597340/show"
+    }
+}
