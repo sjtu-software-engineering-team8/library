@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h1>这是 App 组件</h1>
-  </div>
+    <div id="app">
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+  
 </template>
 
 <script>
@@ -9,5 +13,13 @@
 
 
 <style lang="scss" scoped>
-
+html,
+        body {
+            margin: 0;
+            padding: 0
+        }
+        .container {
+            display: flex;
+            height: 800px
+        }
 </style>
