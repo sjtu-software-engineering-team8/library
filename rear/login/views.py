@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from . import models
 from .forms import UserForm
 from .forms import RegisterForm
@@ -91,3 +92,20 @@ def hash_code(s, salt='mysite'):  # 加点盐
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
+
+#new
+
+def confirm(request):
+    user = {}
+    object1 = {}
+    if request.method == 'POST':
+        user['name'] = request.POST.get('name')
+        try:
+            check = models.User.objects.get(name=user['name'])
+            object1['status'] = 0
+            object1['no'] = check.number
+            return JsonResponse(object1)
+        except:
+            object1['status'] = 1
+            object1['no'] = -250
+            return JsonResponse(object1)
