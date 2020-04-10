@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class User(models.Model):
     '''用户表'''
 
@@ -24,3 +25,19 @@ class User(models.Model):
     class Meta:
         ordering = ['c_time']
         verbose_name = '用户'
+
+
+class Desk(models.Model):
+    desk_number = models.CharField(primary_key=True, max_length=5)
+    floor = models.CharField(max_length=1)
+    plug_state = models.BooleanField()
+    student_number = models.IntegerField(null=True)
+
+
+class Rent(models.Model):
+    id = models.AutoField(primary_key=True)
+    number = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_time = models.IntegerField()
+    end_time = models.IntegerField()
+    desk_number = models.ForeignKey(Desk, on_delete=models.CASCADE)
+    operate_time = models.DateTimeField(auto_now_add=True)
