@@ -1,9 +1,12 @@
 import os
-import MySQLdb 
+import pymysql
+#import MySQLdb
+
 class user1:
-    db = MySQLdb.connect(
+    db = pymysql.connect(
         host='localhost',
         user='root',
-        passwd='',
-        db='user'
+        passwd='root',
+        #db='user'
+        db='mylibrary'
     )

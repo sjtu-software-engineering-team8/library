@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+% extends 'login/base.html' %}
+{% load staticfiles %}
+
+{% block title %}查询座位{% endblock %}
+{% block content %}
+    <div class="s-mod w1100" style="height:710px">
+        <div class="s-mod-loding"><img src="images/loading_d.gif"></div>
+        <ul>
+            {% for each in results %}
+                {% if each.seat_id == 1 %}
+                    {% if each.status == 1 %}
+                        <li id="{{ each.seat_id }}" value="{{ each.status }}" class="s-mod-item" w="266" h="127" l="0"
+                            t="0"
+                            bg="#e8443a" cbg="#d92e24">
+                            <div class="s-mod-wrap">
+                                <div class="s-mod-def"><span>座位：{{ bg }}{{ each.seat_id }}</span></div>
+                                <div class="s-mod-cur"><span>信息：{{ each.msg }}</span></div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li id="{{ each.seat_id }}" value="{{ each.status }}" class="s-mod-item" w="266" h="127" l="0"
+                            t="0"
+                            bg="#000000" cbg="#d92e24">
+                            <div class="s-mod-wrap">
+                                <div class="s-mod-def"><span>座位：{{ bg }}{{ each.seat_id }}</span></div>
+                                <div class="s-mod-cur"><span>信息：{{ each.msg }}</span></div>
+                            </div>
+                        </li>
+                    {% endif %}
+
+                {% endif %}
+
+                {% if each.seat_id == 2 %}
+                    {% if each.status == 1 %}
+                        <li class="s-mod-item" w="266" h="127" l="278" t="0" bg="#e8443a" cbg="#922a7b">
+                            <div class="s-mod-wrap">
+                                <div class="s-mod-def"><span>座位：{{ each.seat_id }}</span></div>
+                                <div class="s-mod-cur"><span>信息：{{ each.msg }}</span></div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="s-mod-item" w="266" h="127" l="278" t="0" bg="#000000" cbg="#922a7b">
+                            <div class="s-mod-wrap">
+                                <div class="s-mod-def"><span>座位：{{ each.seat_id }}</span></div>
+                                <div class="s-mod-cur"><span>信息：{{ each.msg }}</span></div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endif %}
+{% endblock %}

@@ -20,7 +20,8 @@ from login import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^', include('login.urls')),
+    url(r'^user/', include('login.urls')),
+    url(r'^seats/',include('seat.urls')),
     url(r'^captcha', include('captcha.urls')),
     url(r'^confirm$',views.confirm)
 ]
