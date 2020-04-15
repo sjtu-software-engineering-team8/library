@@ -2,8 +2,9 @@ from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 #restFramework是django中一个提供API接口的框架
-
+from . import models
 from .models import Desk,Rent
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -78,3 +79,21 @@ def get_use_all_seat(request):
                                     })
 
     return render(request, 'seat/base.html', locals())
+
+
+def search(request):
+    user = request.GET.get('No')
+    objreturn ={}
+    seatsearch = list(models.Desk.objects.values().filter(rent_state=0))
+    usersearch = list(models.Rent.objects.values().filter(user_number_id=user))
+    print(seatsearch)
+    print(usersearch)
+    if usersearch == []:
+        objreturn['status'] = 1
+        objreturn['message'] = seatsearch
+        objreturn['rent'] = ''
+    else:
+        objreturn['status'] = 0
+        objreturn['message'] = seatsearch
+        objreturn['rent'] = usersearch
+    return JsonResponse(objreturn)
