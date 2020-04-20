@@ -152,8 +152,11 @@ def rent(request):
                  i = i + 1
             if flag == 1:
                 objreturn['status'] = 3
+                models.Rent.objects.create(user_number_id = userno,desk_number_id =desk_number,start_time =start_time0,end_time =end_time0,date = date0,status = 0)#插入数据
+                models.Desk.objects.filter(desk_id=desk_number).update(rent_state = 1)
+                desk_choice=list(models.Desk.objects.values('desk_id','floor','plug_state').filter(desk_id=desk_number))
+                objreturn['desk_information'] = desk_choice
                 return JsonResponse(objreturn)
-        models.Rent.objects.create(user_number_id = userno,desk_number_id =desk_number,start_time =start_time0,end_time =end_time0,date = date0,status = 0)#插入数据
     objreturn['status'] = 4
     return JsonResponse(objreturn)
 

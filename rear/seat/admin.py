@@ -15,7 +15,7 @@ class DeskAdmin(admin.ModelAdmin):
 
 class RentAdmin(admin.ModelAdmin):
     #后台展示的字段 分别是用户id，桌子id,预定日期，开始时刻，结束时刻，操作时刻，正在使用情况，履行约定情况
-    list_display =['user_number', 'desk_number', 'date', 'start_time', 'end_time', 'operate_time', 'status']
+    list_display =['user_number_id', 'desk_number_id', 'date', 'start_time', 'end_time', 'operate_time', 'status']
     list_per_page = 10
 
 

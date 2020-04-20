@@ -73,7 +73,7 @@ class Rent(models.Model):
 
     class Meta:
         unique_together = (
-            ('user_number','desk_number','date','start_time','end_time'),
+            ('user_number_id','desk_number_id','date','start_time','end_time'),
         )    # 五个属性联合构成主码，防止有人重复预定
         db_table ='rent'
         verbose_name_plural = '预约座位信息'
