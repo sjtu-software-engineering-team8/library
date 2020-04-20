@@ -180,3 +180,20 @@ def rent(request):
         objreturn['status'] = 4
         return JsonResponse(objreturn)
 
+def renew(request):
+    user=request.POST.get('No')
+    end_time0 = request.POST.get('end_time')
+
+    objreturn = {}
+    recordsearch=models.Rent.objects.values().filter(user_number_id=user)
+
+    if recordsearch:
+        objreturn['status'] = 0
+        if end_time0>recordsearch.end_time:
+             models.Rent.objects.create(user_number_id=user,desk_number_id=recordsearch.desk_number,start_time =recordsearch.end_time,end_time=end_time0,date =recordsearch.data,status = 0) #插入
+            # recordsearch.end_time = end_time  rent修改
+        else:
+            objreturn['status'] = 1
+    else:
+        objreturn['status'] = 1
+    return JsonResponse(objreturn)
