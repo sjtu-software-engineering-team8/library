@@ -105,12 +105,17 @@ def search(request):
 #取消预约
 def cancel(request):
     user = request.POST.get('No')
+    desk_number = request.POST.get('desk_number')
+
     objreturn={}
-    usersearch = models.Rent.objects.values().filter(user_number_id=user)
-    print(usersearch)
-    if usersearch:
+    recordsearch = models.Rent.objects.values().filter(user_number_id=user)
+
+    print(recordsearch)
+    if recordsearch:
         objreturn['status'] = 0
-        usersearch.end_time = usersearch.start_time #end_time数据类型只能是整数，故设置为起始时间。 #取消是否代表将整条记录删掉？怎么做？
+        #models.Rent.objects.values().filter(user_number_id=user).delete() #直接物理删除
+        models.Desk.objects.filter(desk_id=desk_number).update(rent_state=0)  #desk当前状态修改
+        recordsearch.end_time = recordsearch.start_time   #rent修改
     else:
         objreturn['status'] = 1
     return JsonResponse(objreturn)

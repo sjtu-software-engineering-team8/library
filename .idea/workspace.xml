@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5b9969e0-809e-44c4-ad89-d5f75f977d3e" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/测试数据生成集/cancel.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rear/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rear/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rear/.idea/mysite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/rear/.idea/mysite.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rear/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rear/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rear/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rear/mysite/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rear/seat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rear/seat/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rear/seat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rear/seat/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rear/seat/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="111" column="1" selection-start-line="111" selection-start-column="1" selection-end-line="111" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="302">
+              <caret line="119" column="31" lean-forward="true" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -45,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/rear/seat/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
-              <caret line="29" column="83" lean-forward="true" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
+              <caret line="29" column="83" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -57,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/rear/seat/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -93,15 +83,15 @@
         <option value="$PROJECT_DIR$/测试数据生成集/desk.py" />
         <option value="$PROJECT_DIR$/rear/mysite/settings.py" />
         <option value="$PROJECT_DIR$/rear/seat/urls.py" />
-        <option value="$PROJECT_DIR$/rear/seat/views.py" />
         <option value="$PROJECT_DIR$/测试数据生成集/cancel.py" />
         <option value="$PROJECT_DIR$/测试数据生成集/insert.sql" />
         <option value="$PROJECT_DIR$/测试数据生成集/cancel.sql" />
+        <option value="$PROJECT_DIR$/rear/seat/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-2" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="261" />
     <option name="width" value="1566" />
     <option name="height" value="1032" />
   </component>
@@ -293,10 +283,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="174" y="0" width="1044" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16003123" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1592233" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="DB Browser" order="3" />
@@ -545,26 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rear/seat/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rear/seat/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="83" lean-forward="true" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rear/login/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-45">
@@ -575,13 +545,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/测试数据生成集/cancel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="158" selection-start-line="2" selection-start-column="158" selection-end-line="2" selection-end-column="158" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/测试数据生成集/cancel.py" />
     <entry file="file://$PROJECT_DIR$/测试数据生成集/cancel.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -596,13 +560,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rear/seat/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="29" column="83" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rear/seat/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rear/seat/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="111" column="1" selection-start-line="111" selection-start-column="1" selection-end-line="111" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="302">
+          <caret line="119" column="31" lean-forward="true" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
         </state>
       </provider>
     </entry>
