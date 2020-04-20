@@ -1,10 +1,14 @@
+import datetime
+
 from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 #restFramework是django中一个提供API接口的框架
 from . import models
+from login.models import User
 from .models import Desk,Rent
 from django.http import JsonResponse
+import traceback
 
 # Create your views here.
 
@@ -116,49 +120,59 @@ def cancel(request):
 def rent(request):
     #status 0：预约成功 ；1：输入数据有误 ；2：已有其他预约记录 ；3：已被他人预约；4：输入未完整
     userno = request.POST.get('No')
-    desk_number = request.POST.get('desk_number')
-    start_time0 = request.POST.get('start_time')
-    end_time0 = request.POST.get('end_time')
-    date0 = request.POST.get('date')
+    desk_number = int(request.POST.get('desk_number'))
+    start_time0 = int(request.POST.get('start_time'))
+    end_time0 = int(request.POST.get('end_time'))
+    d = request.POST.get('date')
+    date0 = datetime.datetime.strptime(d,'%Y-%m-%d')
+    date0 = date0.strftime('%m/%d/%Y')
     objreturn ={}
-    if userno and desk_number and start_time0 and end_time0 and date:
-        if start_time0 < end_time0:
+    if userno and desk_number and start_time0 and end_time0 and date0:
+        if start_time0 > end_time0:
             objreturn['status'] = 1
             return JsonResponse(objreturn)
         usersearch = list(models.Rent.objects.values().filter(user_number_id=userno,status=0))#检查是否有未来的预约
-        if usersearch == []:
+        print(usersearch)
+        if usersearch != []:
             objreturn['status'] = 2
             return JsonResponse(objreturn)
         desksearch = list(models.Rent.objects.values().filter(desk_number_id=desk_number,status=0))
         flag1 = 0
         i = 0
-        while (i < len(desksearch)):#检查当日的同一位子有预约
-            da = desksearch[i]['date']
+        while i < len(desksearch):#检查当日的同一位子有预约
+            da = desksearch[i]['date'].strftime('%m/%d/%Y')
             if da == date0:
                 flag1 = 1
                 break
             i = i + 1
-        if flag1 == 1:#检查当日的同一位子的预约是否时间冲突
+        if flag1 == 1: #检查当日的同一位子的预约是否时间冲突
             i = 0
-            flag =0
-            while (i < len(desksearch)):
-                 if desksearch[i]['date'] != date0:
-                     continue
-                 st = desksearch[i]['start_time'] 
-                 ed = desksearch[i]['end_time']
-                 if (st > start_time0 & ed < end_time0)|(st < end_time0 < ed)|(st < start_time0 < ed):
-                    flag =1
-                    break
-                 i = i + 1
+            flag = 0
+            while i < len(desksearch):
+                if desksearch[i]['desk_number_id_id'] == desk_number:
+                    st = desksearch[i]['start_time']
+                    ed = desksearch[i]['end_time']
+                    if (st <= start_time0 < ed) | (st < end_time0 <= ed) | (start_time0 <= st & end_time0 >= ed):
+                        flag = 1
+                        break
+                i = i + 1
             if flag == 1:
                 objreturn['status'] = 3
                 return JsonResponse(objreturn)
-            models.Rent.objects.create(user_number_id = userno,desk_number_id =desk_number,start_time =start_time0,end_time =end_time0,date = date0,status = 0)#插入数据
+        try:
+            userforeign = User.objects.get(number=userno)
+            deskforeigin = Desk.objects.get(desk_id=desk_number)
+            models.Rent.objects.create(user_number_id=userforeign,desk_number_id=deskforeigin,start_time =start_time0,end_time=end_time0,date =d,status = 0)#插入数据
             models.Desk.objects.filter(desk_id=desk_number).update(rent_state = 1)
             desk_choice=list(models.Desk.objects.values('desk_id','floor','plug_state').filter(desk_id=desk_number))
             objreturn['desk_information'] = desk_choice
             objreturn['status'] = 0
             return JsonResponse(objreturn)
-    objreturn['status'] = 4
-    return JsonResponse(objreturn)
+        except:
+            objreturn['status'] = 4
+            traceback.print_exc()
+            return JsonResponse(objreturn)
+    else:
+        objreturn['status'] = 4
+        return JsonResponse(objreturn)
 
