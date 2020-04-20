@@ -41,6 +41,7 @@ class Rent(models.Model):
         (0,'尚未使用'),
         (1,'正被使用'),
         (2,'使用结束'),
+        (3,'已取消')
     )       #是否应该增加选项？ 尚未使用、正在使用中
 
     id = models.AutoField(primary_key=True)
