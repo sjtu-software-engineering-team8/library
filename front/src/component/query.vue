@@ -3,6 +3,16 @@
         <div v-if="this.$store.state.cookie">
             <div>
             <h1 style="color:#ffffff;font-size:30px">查询界面</h1>
+            
+            <input type="button"  value="查询" @click="query" class="btn btn-primary">
+            <div>
+                <!--想在这里画一个下拉列表，但是不确定未知选项个数的下拉列表怎么画-->
+                <!--于是demo里就用插值表达式简单显示了-->
+                <!--这里还缺一个v-if,只当点击查询按钮的时候显示查询信息。-->
+                <!--另外关于v-if的使用，如何使用v-if调用这里的flag属性？-->
+                <p style="color:#ffffff;font-size:15px">空座信息{{message}}</p>
+                <p style="color:#ffffff;font-size:15px">预约信息{{rent_record}}</p>
+            </div>
             </div>
         </div>
         <div v-else>
@@ -13,7 +23,30 @@
 </template>
 
 <script>
-    
+export default{
+  data(){
+    return{
+      flag:"false",     // 是否已经点击了查询按钮
+      message:[],       // 空座信息，数组形式
+      rent_record:{}    //账户预约记录
+    };
+  },
+  methods:{
+    query(){
+      this.flag="true";
+      this.$http.get('searchAPI').then(result=>
+      {
+        if(result.body.status==0) //查询成功
+          {
+            this.message=result.body.message;
+            this.rent_record=result.body.rent;
+          }
+        else
+          alert("查询失败！")
+      })
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .main {

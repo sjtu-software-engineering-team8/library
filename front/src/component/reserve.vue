@@ -3,6 +3,16 @@
         <div v-if="this.$store.state.cookie">
             <div>
             <h1 style="color:#ffffff;font-size:30px">预约界面</h1>
+              <div class="panel-body form-inline">
+                <form>
+                  <input type="text" v-model=user_no placeholder="账号">
+                  <input type="text" v-model=desk_num placeholder="预约座位号">
+                  <input type="text" v-model=start_time placeholder="开始时间">
+                  <input type="text" v-model=end_time placeholder="结束时间">
+                  <input type="text" v-model=date placeholder="预约日期">
+                </form>
+              </div>
+              <input type="button"  value="提交" @click="submit" class="btn btn-primary">
             </div>
         </div>
         <div v-else>
@@ -13,7 +23,44 @@
 </template>
 
 <script>
-    
+export default{
+  data(){
+    return {
+        user_no:"",
+        desk_num:"",
+        start_time:"",
+        end_time:"",
+        date:"",
+    };
+  },
+  methods:{
+    submit(){
+        console.log(this.user_no);
+        console.log(this.desk_num);
+        console.log(this.start_time);
+        console.log(this.end_time);
+        console.log(this.date);
+        //url可能还有点问题
+        this.$http    
+          .post("http://127.0.0.1:8000/seat/rent",{user_no:this.user_no, desk_num:this.desk_num, start_time:this.start_time, 
+          end_time:this.end_time, date: this.date},{emulateJSON:true})  
+          .then(function(result)
+          {
+            if (result.body.status==0)
+              alert("预约成功！")
+            else if(result.body.status==1)
+              alert("预约失败：输入数据有误，请检查！")
+            else if(result.body.status==2)
+              alert("预约失败：已有其他预约数据！")
+            else if(result.body.status==3)
+              alert("预约失败：该座位已被他人预约！")
+            else if(result.body.status==4)
+              alert("预约失败：输入未完整！")
+          } 
+            );
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .main {
