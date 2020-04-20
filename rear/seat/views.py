@@ -108,14 +108,15 @@ def cancel(request):
     desk_number = request.POST.get('desk_number')
 
     objreturn={}
-    recordsearch = models.Rent.objects.values().filter(user_number_id=user)
+    recordsearch = models.Rent.objects.values().filter(user_number_id=user,desk_number_id=desk_number,status=0)
 
     print(recordsearch)
     if recordsearch:
         objreturn['status'] = 0
         #models.Rent.objects.values().filter(user_number_id=user).delete() #直接物理删除
         models.Desk.objects.filter(desk_id=desk_number).update(rent_state=0)  #desk当前状态修改
-        recordsearch.end_time = recordsearch.start_time   #rent修改
+        recordsearch.update(status=3)   #rent修改
+
     else:
         objreturn['status'] = 1
     return JsonResponse(objreturn)
