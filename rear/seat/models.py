@@ -44,28 +44,29 @@ class Rent(models.Model):
     )       #是否应该增加选项？ 尚未使用、正在使用中
 
     id = models.AutoField(primary_key=True)
-    user_number = models.ForeignKey(User, on_delete=models.CASCADE)
-    desk_number = models.ForeignKey(Desk, on_delete=models.CASCADE)  #外键
+    user_number_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    desk_number_id = models.ForeignKey(Desk, on_delete=models.CASCADE)  #外键
 
-    date = models.DateField()
+    date = models.DateField()#基础格式为2000-1-1
     time_choices = (
-        (1,'8:00'),
-        (2, '9:00'),
-        (3, '10:00'),
-        (4, '11:00'),
-        (5, '12:00'),
-        (6, '13:00'),
-        (7, '14:00'),
-        (8, '15:00'),
-        (9, '16:00'),
-        (10, '17:00'),
-        (11, '18:00'),
-        (12, '19:00'),
-        (13, '20:00'),
+        (8,'8:00'),
+        (9, '9:00'),
+        (10, '10:00'),
+        (11, '11:00'),
+        (12, '12:00'),
+        (13, '13:00'),
+        (14, '14:00'),
+        (15, '15:00'),
+        (16, '16:00'),
+        (17, '17:00'),
+        (18, '18:00'),
+        (19, '19:00'),
+        (20, '20:00'),
     )
     start_time = models.IntegerField(db_column='start_time',choices=time_choices)
-    end_time = models.IntegerField(db_column='end_time',choices=time_choices)
-    operate_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.IntegerField(db_column='end_time',choices=time_choices) 
+    #是否应该加入start_time < end_time约束
+    operate_time = models.DateTimeField(auto_now_add=True)  #将添加时间写入
 
     status = models.IntegerField(db_column='status',choices=status_choice)
 
