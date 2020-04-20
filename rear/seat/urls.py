@@ -7,5 +7,6 @@ urlpatterns = [
     #url(r'^$', views.get_use_all_seat),
     url(r'^search$',views.search),
     url(r'^cancel$',views.cancel),
-    url(r'^rent$',views.rent)
+    url(r'^rent$',views.rent),
+    url(r'^renew$',views.renew)
 ]

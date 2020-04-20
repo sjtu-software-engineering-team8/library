@@ -189,8 +189,8 @@ def renew(request):
 
     if recordsearch:
         objreturn['status'] = 0
-        if end_time0>recordsearch.end_time:
-            Rent.objects.filter(user_number_id=user).updata(end_time=end_time0)
+        if int(end_time0)>recordsearch[0]['end_time']:
+            recordsearch.update(end_time=end_time0)
             # recordsearch.end_time = end_time  rent修改
         else:
             objreturn['status'] = 1
