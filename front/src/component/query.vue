@@ -4,15 +4,37 @@
             <div>
             <h1 style="color:#ffffff;font-size:30px">查询界面</h1>
             
-            <input type="button"  value="查询" @click="query" class="btn btn-primary">
             <div>
-                <!--想在这里画一个下拉列表，但是不确定未知选项个数的下拉列表怎么画-->
-                <!--于是demo里就用插值表达式简单显示了-->
-                <!--这里还缺一个v-if,只当点击查询按钮的时候显示查询信息。-->
-                <!--另外关于v-if的使用，如何使用v-if调用这里的flag属性？-->
-                <p style="color:#ffffff;font-size:15px">空座信息{{message}}</p>
-                <p style="color:#ffffff;font-size:15px">预约信息{{rent_record}}</p>
-            </div>
+                <!--空座信息display-->
+                <div>\n</div>
+                <div class="container-fluid">
+                   <h1 style="color:#ffffff;front-size:30px">空余座位</h1>
+                   <div>\n</div>
+                   <div class="row">
+                      <div class="block col-md-4" style="color:#ffffff;front-size:15px;">座位号</div>
+                      <div class="block col-md-4" style="color:#ffffff;front-size:15px;">所在楼层</div>
+                   </div>
+                     <div class="row" v-for="(seat,i) in message">
+                        <div class="block col-md-4" style="color:#ffffff;front-size:15px;">{{seat.desk_number}}</div>
+                        <div class="block col-md-4" style="color:#ffffff;front-size:15px;">{{seat.floor}}</div>
+                     </div>
+                </div>
+                
+                <!--预约信息display-->
+                <div>\n</div>
+                <div class="container-fluid">
+                   <h1 style="color:#ffffff;front-size:30px">已预约的信息</h1>
+                   <div>\n</div>
+                   <div class="row">
+                      <div class="block col-md-4" style="color:#ffffff;front-size:15px;">座位号</div>
+                      <div class="block col-md-4" style="color:#ffffff;front-size:15px;">所在楼层</div>
+                   </div>
+                     <div class="row">
+                        <div class="block col-md-4" style="color:#ffffff;front-size:15px;">{{rent_record.desk_number}}</div>
+                        <div class="block col-md-4" style="color:#ffffff;front-size:15px;">{{rent_record.floor}}</div>
+                     </div>
+                </div>
+              </div>
             </div>
         </div>
         <div v-else>
@@ -45,6 +67,9 @@ export default{
           alert("查询失败！")
       })
     }
+  },
+  created(){
+    this.query();
   }
 }
 </script>
