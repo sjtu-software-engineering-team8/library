@@ -4,6 +4,14 @@
             <div>
             <h1 style="color:#ffffff;font-size:30px">续约界面</h1>
             </div>
+			    <div class="container-fluid">
+                   <h1>看板</h1>
+                   <div class="row">
+                   <div class="block col-md-4">.col-md-4</div>
+                   <div class="block col-md-4">.col-md-4</div>
+                   <div class="block col-md-4">.col-md-4</div>
+            </div>
+      </div>
         </div>
         <div v-else>
             <h1 style="color:#ffffff;font-size:30px;padding-bottom:50px ">您还未验证，请前往验证</h1>
