@@ -2,13 +2,11 @@
   <div class="main">
     <div v-if="this.$store.state.flag">
       <div>
-        <h1 style="color:#ffffff;font-size:30px">
-          为确保本人操作，请输入您的账号名
-        </h1>
+        <h1 style="color:black;font-size:30px">为确保本人操作，请输入您的账号名</h1>
       </div>
 
       <div style="overflow:hidden;padding-top:100px">
-        <div style="float:left;padding:11px;color:#ffffff">账号</div>
+        <div style="float:left;padding:11px;color:black">账号</div>
         <div class="cssfx">
           <input
             type="text"
@@ -24,9 +22,7 @@
       </div>
     </div>
     <div v-else>
-      <h1 style="color:#ffffff;font-size:30px">
-        欢迎回来{{ this.$store.state.cookie }},请选择服务
-      </h1>
+      <h1 style="color:black;font-size:30px">欢迎回来{{ this.$store.state.cookie }},请选择服务</h1>
     </div>
   </div>
 </template>
@@ -68,7 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  background-color: #090821;
+  background-color: white;
   flex: 8;
   padding-top: 80px;
   padding-left: 200px;
@@ -86,7 +82,7 @@ div {
   float: left;
   input {
     width: 20em;
-    color: hsla(0, 0%, 100%, 0.6);
+    color: black;
     font-size: inherit;
     font-family: inherit;
     background-color: transparent;
@@ -99,7 +95,7 @@ div {
   }
 
   input::placeholder {
-    color: hsla(0, 0%, 100%, 0.6);
+    color: grey;
   }
 
   span {
