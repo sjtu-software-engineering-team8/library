@@ -1,0 +1,41 @@
+  <div>
+  <h1 style="color:black;font-size:30px">欢迎来到续约界面</h1>
+  <input type="button"  value="续约" @click="renew" class="btn btn-primary">
+  
+  <div class="panel-body form-inline">
+
+    <form>
+      <input type="text" v-model=user_no placeholder="账号">
+      <input type="text" v-model=end_time placeholder="结束时间">
+    </form>
+  </div>
+<input type="button"  value="提交" @click="submit" class="btn btn-primary">
+</template>
+<script>
+export default{
+data(){
+return {
+ user_no:"",
+ end_time:"",
+};
+}
+methods:{
+submit(){
+    console.log(this.user_no);
+    console.log(this.end_time);
+
+    //url暂时还不知道该怎么写，这儿先随便写了一个
+
+    this.$http.post("http://127.0.0.1:8000/seat/renew",{user_no:this.user_no,  end_time:this.end_time},{emulateJSON:true})  
+      .then(function(result)
+      {
+        if (result.body.status==0)
+          alert("续约成功！")
+        else if(result.body.status==1)
+          alert("续约失败，用户没有预约过，无法续约")
+      } 
+        );
+}
+}
+}
+</script>
