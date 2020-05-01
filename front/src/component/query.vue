@@ -5,7 +5,9 @@
         <h1 style="color:black;font-size:30px">查询界面</h1>
 
         <div>
+          
           <!--空座信息display-->
+          
           <div></div>
           <div class="container-fluid">
             <h1 style="color:black;front-size:30px">空余座位</h1>
@@ -20,7 +22,9 @@
             </div>
           </div>
 
+
           <!--预约信息display-->
+          
           <div></div>
           <div class="container-fluid">
             <h1 style="color:black;front-size:30px">已预约的信息</h1>
@@ -34,6 +38,7 @@
                 class="block col-md-4"
                 style="color:black;front-size:15px;"
               >{{rent_record[0].desk_number_id_id}}</div>
+              
               <div
                 class="block col-md-4"
                 style="color:black;front-size:15px;"
@@ -52,13 +57,13 @@
   </div>
 </template>
 
-<script>
+<script>  
 export default {
   data() {
     return {
-      flag: "false", // 是否已经点击了查询按钮
       message: [], // 空座信息，数组形式
-      rent_record: {} //账户预约记录
+      rent_record: [], //账户预约记录
+      floor:'1'
     };
   },
   methods: {
@@ -80,6 +85,9 @@ export default {
     this.query();
   }
 };
+
+
+
 </script>
 <style lang="scss" scoped>
 .main {

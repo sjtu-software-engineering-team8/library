@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import VueResource from "vue-resource";
+import elementUI from "Element-UI";
+Vue.use(elementUI);
 Vue.use(VueResource);
-Vue.http.options.root = "http://127.0.0.1:3000";
+Vue.http.options.root = "http://127.0.0.1:8000";
 import Vuex from "vuex";
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -19,8 +21,12 @@ import "./lib/mui/css/mui.min.css";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+
+
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
+
 var store = new Vuex.Store({
     state: {
         cookie: "",

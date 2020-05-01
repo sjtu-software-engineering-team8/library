@@ -2,16 +2,39 @@
   <div class="main">
     <div v-if="this.$store.state.cookie">
       <div>
-        <h1 style="color:blackf;font-size:30px">预约界面</h1>
-        <div class="panel-body form-inline">
-          <form>
-            <input type="text" v-model="desk_num" placeholder="预约座位号" />
-            <input type="text" v-model="start_time" placeholder="开始时间" />
-            <input type="text" v-model="end_time" placeholder="结束时间" />
-            <input type="text" v-model="date" placeholder="预约日期" />
-          </form>
-        </div>
-        <input type="button" value="提交" @click="submit" class="btn btn-primary" />
+        <el-container style="height: 700px; width: 850px; border: 1px solid #eee">
+          <el-header style="text-align: center; font-size: 12px;">
+            <h1 class="mainTitle">预约页面</h1>
+          </el-header>
+          <!--我电脑的element-ui并不能很好地显示，但是范例写日历是这么写的-->
+          <el-calendar v-model="calendar"></el-calendar>
+          <el-main>
+            <el-form label-width="80px">
+              <el-form-item label="座位号" size="mini">
+                <el-input v-model="desk_num"></el-input>
+              </el-form-item>
+              <el-form-item label="预约日期">
+                <el-date-picker
+                  v-model="date"
+                  type="date"
+                  placeholder="选择日期"
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
+                ></el-date-picker>
+              </el-form-item>
+              <el-form-item label="开始时间">
+                <el-input v-model="start_time"></el-input>
+              </el-form-item>
+              <el-form-item label="结束时间">
+                <el-input v-model="end_time"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submit">提交</el-button>
+                <el-button type="primary" @click="reset">重置</el-button>
+              </el-form-item>
+            </el-form>
+          </el-main>
+        </el-container>
       </div>
     </div>
     <div v-else>
@@ -31,7 +54,8 @@ export default {
       desk_num: "",
       start_time: "",
       end_time: "",
-      date: ""
+      date: "",
+      calendar: new Date()
     };
   },
   methods: {
@@ -64,6 +88,14 @@ export default {
             alert("预约失败：该座位已被他人预约！");
           else if (result.body.status == 4) alert("预约失败：输入未完整！");
         });
+    },
+    reset() {
+      this.desk_num = "";
+      this.start_time = "";
+      this.end_time = "";
+      this.date = "";
+      console.log(this.desk_num);
+      alert("testReset");
     }
   }
 };
@@ -76,6 +108,12 @@ export default {
   padding-left: 200px;
   height: 800px;
 }
+.main .mainTitle {
+  text-shadow: 5px 5px 5px #ff0000;
+  font-family: "楷体";
+  font-size: "40px";
+}
+
 h1 {
   margin: 0;
   padding: 0;
@@ -158,5 +196,57 @@ button:hover {
 
 button:hover::before {
   transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
+}
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
 }
 </style>
