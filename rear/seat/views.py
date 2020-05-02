@@ -122,7 +122,7 @@ def cancel(request):
     return JsonResponse(objreturn)
 
 def rent(request):
-    #status 0：预约成功 ；1：输入数据有误 ；2：已有其他预约记录 ；3：已被他人预约；4：输入未完整
+    #status 输入数据有误 ；20：预约成功 ；1：：已有其他预约记录 ；3：已被他人预约；4：输入未完整
     userno = request.POST.get('No')
     desk_number = int(request.POST.get('desk_number'))
     start_time0 = int(request.POST.get('start_time'))
@@ -188,12 +188,34 @@ def renew(request):
     recordsearch=models.Rent.objects.values().filter(user_number_id=user,status=0)
 
     if recordsearch:
-        objreturn['status'] = 0
-        if int(end_time0)>recordsearch[0]['end_time']:
+        if int(end_time0) > recordsearch[0]['end_time']:
+            desksearch = list(models.Rent.objects.values().filter(desk_number_id=recordsearch[0]['desk_number'], status=0))
+            flag1 = 0
+            i = 0
+            while i < len(desksearch):  # 检查当日的同一位子有预约
+                da = desksearch[i]['date'].strftime('%m/%d/%Y')
+                if da == recordsearch[0]['data']:
+                    flag1 = 1
+                    break
+                i = i + 1
+            if flag1 == 1:  # 检查当日的同一位子的预约是否时间冲突
+                i = 0
+                flag = 0
+                while i < len(desksearch):
+                    if desksearch[i]['desk_number_id_id'] == recordsearch[0]['desk_number']:
+                        st = desksearch[i]['start_time']
+                        if st <= end_time0:
+                            flag = 1
+                            break
+                    i = i + 1
+                if flag == 1:
+                    objreturn['status'] = 1
+                    return JsonResponse(objreturn)
+            objreturn['status'] = 0
             recordsearch.update(end_time=end_time0)
-            # recordsearch.end_time = end_time  rent修改
         else:
             objreturn['status'] = 1
-    else: 
+    else:
         objreturn['status'] = 1
+
     return JsonResponse(objreturn)
