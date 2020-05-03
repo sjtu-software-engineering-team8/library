@@ -1,20 +1,54 @@
+
 <template>
   <div class="main">
     <div v-if="this.$store.state.cookie">
       <div>
-        <h1 style="color:black;font-size:30px">取消界面</h1>
+        
+  <h1 style="color:black;font-size:30px">欢迎来到取消预约界面</h1>
+  <input type="button"  value="取消预约" @click="cancel" class="btn btn-primary">
+  
+  <div class="panel-body form-inline">
+
+    <form>
+      <input type="text" v-model=user_no placeholder="账号">
+    </form>
+  </div>
+<input type="button"  value="提交" @click="submit" class="btn btn-primary">
       </div>
     </div>
     <div v-else>
       <h1 style="color:black;font-size:30px;padding-bottom:50px ">您还未验证，请前往验证</h1>
       <router-link to="/">
-        <button>前往验证</button>
-      </router-link>
+        <button>前往验证</button>      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+export default{
+data(){
+return {
+ user_no:"",
+};
+},
+methods:{
+submit(){
+    console.log(this.user_no);
+
+    //url暂时还不知道该怎么写，这儿先随便写了一个
+
+    this.$http.post("http://127.0.0.1:8000/seat/cancel",{user_no:this.user_no},{emulateJSON:true})  
+      .then(function(result)
+      {
+        if (result.body.status==0)
+          alert("您的预约取消了！")
+        else if(result.body.status==1)
+          alert("您的预约没有成功取消")
+      } 
+        );
+}
+}
+}
 </script>
 <style lang="scss" scoped>
 .main {
