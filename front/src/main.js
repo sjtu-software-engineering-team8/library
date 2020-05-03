@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import VueResource from "vue-resource";
 import elementUI from "Element-UI";
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(elementUI);
 Vue.use(VueResource);
 Vue.http.options.root = "http://127.0.0.1:8000";

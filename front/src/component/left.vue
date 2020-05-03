@@ -28,7 +28,6 @@
 .left {
   background-color: white;
   flex: 2;
-  height: 100%;
 }
 .leftcontainer {
   text-align: center;

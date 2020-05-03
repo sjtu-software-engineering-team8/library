@@ -2,7 +2,7 @@
 <template>
   <div class="query">
     <div v-if="this.$store.state.cookie">
-      <el-container style="height: 700px; width: 850px; border: 1px solid #eee">
+      <el-container style=" width: 850px; border: 1px solid #eee">
         <el-header style="text-align: center; font-size: 12px;">
           <h1 class="mainTitle">查询页面</h1>
         </el-header>
@@ -87,11 +87,11 @@
                   <h5>第一层</h5>
                 </el-header>
                 <div v-for="rowNum in row">
-                  <input type="checkbox" />
-                  <input type="checkbox" />
-                  <input type="checkbox" />
-                  <input type="checkbox" />
-                  <input type="checkbox" />
+                  <img :src="imageUrl" style="width:10%" />
+                  <img :src="imageUrl" style="width:10%" />
+                  <img :src="imageUrl" style="width:10%" />
+                  <img :src="imageUrl" style="width:10%" />
+                  <img :src="imageUrl" style="width:10%" />
                 </div>
               </el-container>
             </el-aside>
@@ -120,13 +120,13 @@
                         <el-header>
                           <h5>第三层</h5>
                         </el-header>
-                      <div v-for="rowNum in row">
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                      </div>
+                        <div v-for="rowNum in row">
+                          <input type="checkbox" />
+                          <input type="checkbox" />
+                          <input type="checkbox" />
+                          <input type="checkbox" />
+                          <input type="checkbox" />
+                        </div>
                       </el-container>
                     </el-aside>
                     <el-main>
@@ -164,10 +164,12 @@
 </template>
 
 <script>
+import imageU from "../img/seatIcon.jpg";
 export default {
   name: "manageStudents",
   data() {
     return {
+      imageUrl: imageU,
       message: [
         { desk_number: "1", floor: "1", plug_state: "0" },
         { desk_number: "2", floor: "3", plug_state: "1" }

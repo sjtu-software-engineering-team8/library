@@ -68,7 +68,6 @@ export default {
   flex: 8;
   padding-top: 80px;
   padding-left: 200px;
-  height: 800px;
 }
 h1 {
   margin: 0;

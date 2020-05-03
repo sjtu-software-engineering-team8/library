@@ -2,7 +2,7 @@
   <div class="main">
     <div v-if="this.$store.state.cookie">
       <div>
-        <el-container style="height: 700px; width: 850px; border: 1px solid #eee">
+        <el-container style=" width: 600px; border: 1px solid #eee">
           <el-header style="text-align: center; font-size: 12px;">
             <h1 class="mainTitle">预约页面</h1>
           </el-header>
@@ -106,7 +106,6 @@ export default {
   flex: 8;
   padding-top: 80px;
   padding-left: 200px;
-  height: 800px;
 }
 .main .mainTitle {
   text-shadow: 5px 5px 5px #ff0000;

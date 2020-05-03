@@ -1,17 +1,15 @@
 <template>
   <div class="main">
     <div v-if="this.$store.state.cookie">
+      <h1 style="color:black;font-size:30px">欢迎来到续约界面</h1>
+      <input type="button" value="续约" @click="renew" class="btn btn-primary" />
 
-       <h1 style="color:black;font-size:30px">欢迎来到续约界面</h1>
-  <input type="button"  value="续约" @click="renew" class="btn btn-primary">
-  
-  <div class="panel-body form-inline">
-
-    <form>
-      <input type="text" v-model=user_no placeholder="账号">
-      <input type="text" v-model=end_time placeholder="结束时间">
-    </form>
-    </div>
+      <div class="panel-body form-inline">
+        <form>
+          <input type="text" v-model="user_no" placeholder="账号" />
+          <input type="text" v-model="end_time" placeholder="结束时间" />
+        </form>
+      </div>
     </div>
     <div v-else>
       <h1 style="color:black;font-size:30px;padding-bottom:50px ">您还未验证，请前往验证</h1>
@@ -23,32 +21,34 @@
 </template>
 
 <script>
-export default{
-data(){
-return {
- user_no:"",
- end_time:"",
+export default {
+  data() {
+    return {
+      user_no: "",
+      end_time: ""
+    };
+  },
+  methods: {
+    submit() {
+      console.log(this.user_no);
+      console.log(this.end_time);
+
+      //url暂时还不知道该怎么写，这儿先随便写了一个
+
+      this.$http
+        .post(
+          "http://127.0.0.1:8000/seat/renew",
+          { user_no: this.user_no, end_time: this.end_time },
+          { emulateJSON: true }
+        )
+        .then(function(result) {
+          if (result.body.status == 0) alert("续约成功！");
+          else if (result.body.status == 1)
+            alert("续约失败，用户没有预约过，无法续约");
+        });
+    }
+  }
 };
-},
-methods:{
-submit(){
-    console.log(this.user_no);
-    console.log(this.end_time);
-
-    //url暂时还不知道该怎么写，这儿先随便写了一个
-
-    this.$http.post("http://127.0.0.1:8000/seat/renew",{user_no:this.user_no,  end_time:this.end_time},{emulateJSON:true})  
-      .then(function(result)
-      {
-        if (result.body.status==0)
-          alert("续约成功！")
-        else if(result.body.status==1)
-          alert("续约失败，用户没有预约过，无法续约")
-      } 
-        );
-}
-}
-}
 </script>
 <style lang="scss" scoped>
 .main {
@@ -56,7 +56,6 @@ submit(){
   flex: 8;
   padding-top: 80px;
   padding-left: 200px;
-  height: 800px;
 }
 h1 {
   margin: 0;
