@@ -25,8 +25,6 @@ Vue.component(SwipeItem.name, SwipeItem);
 
 
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min'
 
 var store = new Vuex.Store({
     state: {

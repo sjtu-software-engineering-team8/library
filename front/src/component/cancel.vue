@@ -2,17 +2,26 @@
 <template>
   <div class="main">
     <div v-if="this.$store.state.cookie">
-      <div>
-        <h1 style="color:black;font-size:30px">欢迎来到取消预约界面</h1>
-        <input type="button" value="取消预约" @click="cancel" class="btn btn-primary" />
-
-        <div class="panel-body form-inline">
-          <form>
-            <input type="text" v-model="user_no" placeholder="账号" />
-          </form>
+      <el-container style=" width: 800px; border: 1px solid #eee">
+        <el-header style="text-align: center; font-size: 12px;">
+          <h1 style="text-shadow: 5px 5px 5px #ff0000;font-family: 楷体; font-size: 40px;">取消预约界面</h1>
+        </el-header>
+        <div v-if="flag">
+          <h1 style="color:black;font-size:20px">您预约的座位信息如下：</h1>
+          <h1
+            style="color:black;font-size:20px"
+          >您预约了{{ rent_record[0].date}}位于主图书馆的{{rent_record[0].desk_number_id_id}}号座位</h1>
+          <h1
+            style="color:black;font-size:20px"
+          >从{{rent_record[0].start_time}}点到{{rent_record[0].end_time}}点</h1>
+          <h1 style="color:black;font-size:20px">请问您是否要取消预约</h1>
+          <div class="panel-body form-inline"></div>
+          <el-button type="text" @click="open" style="margin-top:200px">取消预约</el-button>
         </div>
-        <input type="button" value="提交" @click="submit" class="btn btn-primary" />
-      </div>
+        <div v-else>
+          <h1 style="color:black;font-size:20px">你还没有预约记录，请先预约</h1>
+        </div>
+      </el-container>
     </div>
     <div v-else>
       <h1 style="color:black;font-size:30px;padding-bottom:50px ">您还未验证，请前往验证</h1>
@@ -27,26 +36,85 @@
 export default {
   data() {
     return {
-      user_no: ""
+      message: [], // 空座信息，数组形式
+      rent_record: [{ desk_number_id_id: "1", floor: "3", plug_state: "0" }],
+      flag: false
     };
   },
   methods: {
+    open() {
+      this.$confirm("此操作将取消预约操作，并扣除一定积分，是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$http
+            .post(
+              "seats/cancel",
+              {
+                No: this.$store.state.No,
+                desk_number: this.rent_record[0].desk_number_id_id
+              },
+              { emulateJSON: true }
+            )
+            .then(function(result) {
+              if (result.body.status === 0) {
+                this.$message({
+                  type: "success",
+                  message: "取消预约成功"
+                });
+                this.flag = false;
+                this.message = [{ msg: "你没有预约的信息" }];
+              } else if (result.body.status === 1)
+                this.$message({
+                  type: "success",
+                  message: "取消预约失败，请联系系统管理员"
+                });
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    },
     submit() {
-      console.log(this.user_no);
-
-      //url暂时还不知道该怎么写，这儿先随便写了一个
-
       this.$http
         .post(
-          "http://127.0.0.1:8000/seat/cancel",
-          { user_no: this.user_no },
+          "seats/cancel",
+          {
+            No: this.$store.state.No,
+            desk_number: this.rent_record[0].desk_number_id_id
+          },
           { emulateJSON: true }
         )
         .then(function(result) {
-          if (result.body.status == 0) alert("您的预约取消了！");
-          else if (result.body.status == 1) alert("您的预约没有成功取消");
+          if (result.body.status === 0) alert("您的预约取消了！");
+          else if (result.body.status === 1) alert("您的预约没有成功取消");
+        });
+    },
+    query() {
+      this.$http
+        .get("seats/search?" + "No=" + this.$store.state.No)
+        .then(result => {
+          console.log(result);
+          if (result.body.status === 0) {
+            //查询成功
+            this.flag = true;
+            this.message = result.body.message;
+            this.rent_record = result.body.rent;
+            console.log(this.rent_record);
+          } else if (result.body.status === 1) {
+            this.flag = false;
+            this.message = [{ msg: "你没有预约的信息" }];
+          }
         });
     }
+  },
+  created() {
+    this.query();
   }
 };
 </script>
@@ -108,11 +176,11 @@ button {
   position: relative;
   font-size: inherit;
   font-family: inherit;
-  color: black;
+  color: white;
   padding: 0.5em 1em;
   outline: none;
   border: none;
-  background-color: white;
+  background-color: hsl(236, 32%, 26%);
   overflow: hidden;
   transition: color 0.4s ease-in-out;
 }
