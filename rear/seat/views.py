@@ -189,12 +189,12 @@ def renew(request):
 
     if recordsearch:
         if int(end_time0) > recordsearch[0]['end_time']:
-            desksearch = list(models.Rent.objects.values().filter(desk_number_id=recordsearch[0]['desk_number'], status=0))
+            desksearch = list(models.Rent.objects.values().filter(desk_number_id_id=recordsearch[0]['desk_number_id_id'], status=0))
             flag1 = 0
             i = 0
             while i < len(desksearch):  # 检查当日的同一位子有预约
                 da = desksearch[i]['date'].strftime('%m/%d/%Y')
-                if da == recordsearch[0]['data']:
+                if da == recordsearch[0]['date']:
                     flag1 = 1
                     break
                 i = i + 1
