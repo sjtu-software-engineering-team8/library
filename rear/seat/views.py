@@ -89,7 +89,7 @@ import traceback
 def search(request):
     user = request.GET.get('No')
     objreturn ={}
-    seatsearch = list(models.Desk.objects.values().filter(rent_state=0))
+    seatsearch = list(models.Desk.objects.values().filter())
     usersearch = list(models.Rent.objects.values().filter(user_number_id=user,status=0))+list(models.Rent.objects.values().filter(user_number_id=user,status=1))
     if usersearch == []:
         objreturn['status'] = 1
