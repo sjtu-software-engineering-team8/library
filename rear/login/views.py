@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from . import models
+from credit.models import Credit
 from .forms import UserForm
 from .forms import RegisterForm
 import hashlib
@@ -72,6 +73,9 @@ def register(request):
                 new_user.email = email
                 new_user.identity = identity
                 new_user.save()
+                user11 = models.User.objects.get(number=number)
+                print(user11)
+                new_credit = Credit.objects.create(user_number_id=user11)
                 return redirect('/login/')  # 自动跳转到登录页面
     register_form = RegisterForm()
     return render(request, 'login/register.html', locals())
