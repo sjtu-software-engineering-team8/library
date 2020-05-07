@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from . import models
 from login.models import User
 from .models import Desk,Rent
+from credit.models import Credit  #新增
 from django.http import JsonResponse
 import traceback
 
@@ -101,12 +102,11 @@ def search(request):
         objreturn['rent'] = usersearch
     return JsonResponse(objreturn)
 
-#尝试写接口 by chenxinran
+#尝试写接口
 #取消预约
 def cancel(request):
     user = request.POST.get('No')
     desk_number = request.POST.get('desk_number')
-
     objreturn={}
     recordsearch = models.Rent.objects.values().filter(user_number_id=user,desk_number_id=desk_number,status=0)
 
@@ -116,7 +116,16 @@ def cancel(request):
         #models.Rent.objects.values().filter(user_number_id=user).delete() #直接物理删除
         models.Desk.objects.filter(desk_id=desk_number).update(rent_state=0)  #desk当前状态修改
         recordsearch.update(status=3)   #rent修改
-
+        '''预约取消部分，新加积分计算'''
+        s = recordsearch.start_time #预定起始时间
+        e = recordsearch.end_time   #预定结束时间
+        ob = models.Credit.objects.filter(user_number_id=user)
+        if (e - s) >= 5:  # 5小时以上
+            ob.score = ob.score - (5+1)  # 信誉积分减6
+        elif (e - s) >= 2:  # 2-4小时
+            ob.score = ob.score -(3+1)  # 信誉积分减4
+        else:  # 一小时
+            ob.score = ob.score -(1+1)  #信誉积分减2
     else:
         objreturn['status'] = 1
     return JsonResponse(objreturn)
@@ -171,6 +180,14 @@ def rent(request):
             desk_choice=list(models.Desk.objects.values('desk_id','floor','plug_state').filter(desk_id=desk_number))
             objreturn['desk_information'] = desk_choice
             objreturn['status'] = 0
+            '''预约部分，信誉积分计算'''
+            ob = models.Credit.objects.filter(user_number_id=userno)
+            if (end_time0-start_time0)>=5:  #5小时以上
+                ob.score = ob.score + 5  # 信誉积分加5
+            elif (end_time0-start_time0)>=2: #2-4小时
+                ob.score = ob.score +3  #信誉积分加3
+            else:  #一小时
+                ob.score = ob.score +1
             return JsonResponse(objreturn)
         except:
             objreturn['status'] = 4
@@ -206,10 +223,19 @@ def renew(request):
                         st = desksearch[i]['start_time']
                         if st <= end_time0:
                             flag = 1
+
                             break
                     i = i + 1
                 if flag == 1:
                     objreturn['status'] = 1
+                    '''续约部分，增加信誉积分计算'''
+                    ob = models.Credit.objects.filter(user_number_id=user)
+                    if (end_time0 - st) >= 5:  # 5小时以上
+                        ob.score = ob.score + 5  # 信誉积分加5
+                    elif (end_time0 - st) >= 2:  # 2-4小时
+                        ob.score = ob.score + 3  # 信誉积分加3
+                    else:  # 一小时
+                        ob.score = ob.score + 1
                     return JsonResponse(objreturn)
             objreturn['status'] = 0
             recordsearch.update(end_time=end_time0)

@@ -1,0 +1,19 @@
+{% extends 'credit/base.html' %}
+{% load staticfiles %}
+
+{% block title %}积分榜{% endblock %}
+{% block content %}
+    {% if request.session.is_login %}
+	    <div id="app"></div>
+        <script type="text/javascript" src="../static/bundle.js"></script>
+    {% for credit in credits %}
+    <tr>
+        <td>{{Credit.credit}}</td>
+    </tr>
+{% endfor %}
+
+{% else %}
+<h1>你尚未登录，只能访问公开内容！</h1>
+{% endif %}
+
+{% endblock %}
