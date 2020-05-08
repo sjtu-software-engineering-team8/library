@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^', include('login.urls')),
     url(r'^seats/',include('seat.urls')),
     url(r'^captcha', include('captcha.urls')),
-    url(r'^credit', include('credit.urls')),
+    url(r'^credit/', include('credit.urls')),
     url(r'^confirm$',views.confirm)
 ]

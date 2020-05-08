@@ -4,5 +4,8 @@ from credit import views
 from django.conf.urls import include
 
 urlpatterns = [
-    url(r'$', views.credit),
+    #url(r'$', views.credit),
+    url(r'^insert$',views.insert),
+    url(r'^getcredit',views.getcredit),
+    url(r'^getall$',views.getall),
 ]
