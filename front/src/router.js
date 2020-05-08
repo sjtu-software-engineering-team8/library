@@ -6,6 +6,7 @@ import renew from './component/renew.vue'
 import reserve from './component/reserve.vue'
 import cancel from './component/cancel.vue'
 import ma from './component/ManageStudents.vue'
+import credit from './component/credit.vue'
 
 
 // 3. 创建路由对象
@@ -15,7 +16,8 @@ var router = new VueRouter({
         { path: '/query', components: { 'left': leftBox, 'main': ma } },
         { path: '/renew', components: { 'left': leftBox, 'main': renew } },
         { path: '/cancel', components: { 'left': leftBox, 'main': cancel } },
-        { path: '/reserve', components: { 'left': leftBox, 'main': reserve } }
+        { path: '/reserve', components: { 'left': leftBox, 'main': reserve } },
+        { path: '/credit', components: { 'left': leftBox, 'main': credit } }
     ]
 })
 

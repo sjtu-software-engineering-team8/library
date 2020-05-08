@@ -18,6 +18,9 @@
       <router-link to="/cancel">
         <h1>取消预约</h1>
       </router-link>
+      <router-link to="/credit">
+        <h1>查看积分</h1>
+      </router-link>
     </div>
   </div>
 </template>

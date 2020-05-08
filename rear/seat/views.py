@@ -89,9 +89,10 @@ import traceback
 
 def search(request):
     user = request.GET.get('No')
+    getid = list(User.objects.values().filter(number=user))[0]['id']
     objreturn ={}
     seatsearch = list(models.Desk.objects.values().filter())
-    usersearch = list(models.Rent.objects.values().filter(user_number_id=user,status=0))+list(models.Rent.objects.values().filter(user_number_id=user,status=1))
+    usersearch = list(models.Rent.objects.values().filter(user_number_id=getid,status=0))+list(models.Rent.objects.values().filter(user_number_id=user,status=1))
     if usersearch == []:
         objreturn['status'] = 1
         objreturn['message'] = seatsearch
@@ -106,9 +107,10 @@ def search(request):
 #取消预约
 def cancel(request):
     user = request.POST.get('No')
+    getid = list(User.objects.values().filter(number=user))[0]['id']
     desk_number = request.POST.get('desk_number')
     objreturn={}
-    recordsearch = models.Rent.objects.values().filter(user_number_id=user,desk_number_id=desk_number,status=0)
+    recordsearch = models.Rent.objects.values().filter(user_number_id=getid,desk_number_id=desk_number,status=0)
 
     print(recordsearch)
     if recordsearch:
@@ -133,6 +135,7 @@ def cancel(request):
 def rent(request):
     #status 输入数据有误 ；20：预约成功 ；1：：已有其他预约记录 ；3：已被他人预约；4：输入未完整
     userno = request.POST.get('No')
+    getid = list(User.objects.values().filter(number=userno))[0]['id']
     desk_number = int(request.POST.get('desk_number'))
     start_time0 = int(request.POST.get('start_time'))
     end_time0 = int(request.POST.get('end_time'))
@@ -144,7 +147,7 @@ def rent(request):
         if start_time0 > end_time0:
             objreturn['status'] = 1
             return JsonResponse(objreturn)
-        usersearch = list(models.Rent.objects.values().filter(user_number_id=userno,status=0))#检查是否有未来的预约
+        usersearch = list(models.Rent.objects.values().filter(user_number_id=getid,status=0))#检查是否有未来的预约
         print(usersearch)
         if usersearch != []:
             objreturn['status'] = 2
@@ -199,10 +202,11 @@ def rent(request):
 
 def renew(request):
     user=request.POST.get('No')
+    getid = list(User.objects.values().filter(number=user))[0]['id']
     end_time0 = request.POST.get('end_time')
 
     objreturn = {}
-    recordsearch=models.Rent.objects.values().filter(user_number_id=user,status=0)
+    recordsearch=models.Rent.objects.values().filter(user_number_id=getid,status=0)
 
     if recordsearch:
         if int(end_time0) > recordsearch[0]['end_time']:
