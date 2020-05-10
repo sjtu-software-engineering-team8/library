@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^seats/',include('seat.urls')),
     url(r'^captcha', include('captcha.urls')),
     url(r'^credit/', include('credit.urls')),
-    url(r'^confirm$',views.confirm)
+    url(r'^confirm1$',views.confirm)
 ]

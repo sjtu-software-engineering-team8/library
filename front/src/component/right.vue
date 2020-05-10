@@ -37,7 +37,7 @@ export default {
   methods: {
     confirmuser() {
       this.$http
-        .post("confirm", { name: this.usercookie }, { emulateJSON: true })
+        .post("confirm1", { name: this.usercookie }, { emulateJSON: true })
         .then(function(result) {
           if (result.body.status === 0) {
             this.$store.state.cookie = this.usercookie;
