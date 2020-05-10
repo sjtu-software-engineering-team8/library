@@ -311,6 +311,8 @@ EMAIL_HOST_USER = 'libraryseat@163.com'  # 帐号
 EMAIL_HOST_PASSWORD = 'TQXGOLHZQGBDQMSN'  # 授权码（****）
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-##### 问题：是否需要在主页面上也增加一个按钮用于直接进入confirm页面？
+##### 问题：
+1、是否需要在主页面上也增加一个按钮用于直接进入confirm页面？
+2、测试数据需要相应的修改
 
 ## by王玮
