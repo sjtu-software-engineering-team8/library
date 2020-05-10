@@ -292,3 +292,25 @@ by 顾睿
    ## by沈刘
 
    
+## 5.10 下午
+
+### 任务完成情况说明：
+
+##### 增加功能：增加注册后邮箱认证功能，未进行确认的用户无法登录。
+
+##### 功能实现说明：向用户注册邮箱发送一封邮件，包含随机生成的验证码。增加confirm页面，在注册完成后，自动跳转到该页面，进行验证码的确认。在user类里新增has_confirmed，默认为false，此时无法登录，需要进行验证。验证码与数据库中记录相匹配，则激活账户，跳转至登录操作。
+
+##### 运行说明：1、需要在setting文件里增加有关邮箱的设置，(我重新申请了一个163邮箱作为发送验证码的邮箱,账号：libraryseat@163.com 密码：sjtusoftwaret8)2、重新数据库迁移
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TSL = False
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_FROM = 'libraryseat@163.com'
+EMAIL_HOST_USER = 'libraryseat@163.com'  # 帐号
+EMAIL_HOST_PASSWORD = 'TQXGOLHZQGBDQMSN'  # 授权码（****）
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+##### 问题：是否需要在主页面上也增加一个按钮用于直接进入confirm页面？
+
+## by王玮
