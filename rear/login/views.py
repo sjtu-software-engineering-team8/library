@@ -4,8 +4,10 @@ from . import models
 from credit.models import Credit
 from .forms import UserForm
 from .forms import RegisterForm
+from .forms import ConfirmForm
 import hashlib
-
+from .models import User,EmailVerifyRecord
+from utils.email_send import send_type_email
 
 
 def index(request):
@@ -24,10 +26,13 @@ def login(request):
             try:
                 user = models.User.objects.get(number=number)
                 if user.password == hash_code(password):
-                    request.session['is_login'] = True
-                    request.session['user_id'] = user.id
-                    request.session['user_name'] = user.name
-                    return redirect('/index/')
+                    if user.has_confirmed != False:
+                        request.session['is_login'] = True
+                        request.session['user_id'] = user.id
+                        request.session['user_name'] = user.name
+                        return redirect('/index/')
+                    else:
+                        message="账号未激活！"
                 else:
                     message="密码不正确！"
             except:
@@ -76,13 +81,41 @@ def register(request):
                 user11 = models.User.objects.get(number=number)
                 print(user11)
                 new_credit = Credit.objects.create(user_number_id=user11)
-                return redirect('/login/')  # 自动跳转到登录页面
+                message = '请前往注册邮箱，进行邮件确认！'
+                send_type_email(email, "register")
+                return redirect("/confirm/")  # 自动跳转到确认页面
     register_form = RegisterForm()
     return render(request, 'login/register.html', locals())
+
+
+def user_confirm(request):
+    if request.method == "POST":
+        confirm_form = ConfirmForm(request.POST)
+        message = "请检查填写的内容！"
+        if confirm_form.is_valid():
+            email=confirm_form.cleaned_data['email']
+            code = confirm_form.cleaned_data['code']
+            all_records = EmailVerifyRecord.objects.filter(email=email)
+            if all_records:
+                for record in all_records:
+                    if code == record.code:
+                        user = User.objects.get(email=email)
+                        user.has_confirmed = True
+                        user.save()
+                        return redirect('/login/')
+                    else:
+                        render(request, 'login/confirm.html', locals())
+            else:
+                render(request, 'login/confirm.html', locals())
+    confirm_form = ConfirmForm()
+
+    return render(request, 'login/confirm.html', locals())
+
 
 def base(request):
     pass
     return render(request, 'login/base.html')
+
 
 def logout(request):
     if not request.session.get('is_login', None):

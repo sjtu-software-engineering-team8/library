@@ -20,3 +20,8 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
     identity = forms.ChoiceField(label='身份', choices=type)
     captcha = CaptchaField(label='验证码')
+
+
+class ConfirmForm(forms.Form):
+    email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    code = forms.CharField(label="验证码", widget=forms.TextInput(attrs={'class': 'form-control'}))
