@@ -316,3 +316,10 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 2、测试数据需要相应的修改
 
 ## by王玮
+
+#### 基本功能全部实现，只剩下美化，准备完结撒花
+
+#### 如果需要运行程序的话需要将根目录下的settiings.py放到mysite下，配置databases选项，然后在终端运行 pip install django-cors-headers 进行数据库迁移就可以了运行了
+
+### by 沈刘
+

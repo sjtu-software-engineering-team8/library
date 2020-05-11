@@ -115,19 +115,23 @@ def cancel(request):
     print(recordsearch)
     if recordsearch:
         objreturn['status'] = 0
-        #models.Rent.objects.values().filter(user_number_id=user).delete() #直接物理删除
-        models.Desk.objects.filter(desk_id=desk_number).update(rent_state=0)  #desk当前状态修改
-        recordsearch.update(status=3)   #rent修改
         '''预约取消部分，新加积分计算'''
-        s = recordsearch.start_time #预定起始时间
-        e = recordsearch.end_time   #预定结束时间
-        ob = models.Credit.objects.filter(user_number_id=user)
+        record=models.Rent.objects.get(user_number_id=getid,desk_number_id=desk_number,status=0)
+        s = record.start_time #预定起始时间
+        e = record.end_time   #预定结束时间
+        ob = Credit.objects.get(user_number_id=getid)
         if (e - s) >= 5:  # 5小时以上
             ob.score = ob.score - (5+1)  # 信誉积分减6
+            ob.save()
         elif (e - s) >= 2:  # 2-4小时
             ob.score = ob.score -(3+1)  # 信誉积分减4
+            ob.save()
         else:  # 一小时
             ob.score = ob.score -(1+1)  #信誉积分减2
+            ob.save()
+        # models.Rent.objects.values().filter(user_number_id=user).delete() #直接物理删除
+        models.Desk.objects.filter(desk_id=desk_number).update(rent_state=0)  # desk当前状态修改
+        recordsearch.update(status=3)  # rent修改
     else:
         objreturn['status'] = 1
     return JsonResponse(objreturn)
@@ -184,13 +188,16 @@ def rent(request):
             objreturn['desk_information'] = desk_choice
             objreturn['status'] = 0
             '''预约部分，信誉积分计算'''
-            ob = models.Credit.objects.filter(user_number_id=userno)
+            ob = Credit.objects.get(user_number_id=getid)
             if (end_time0-start_time0)>=5:  #5小时以上
                 ob.score = ob.score + 5  # 信誉积分加5
+                ob.save()
             elif (end_time0-start_time0)>=2: #2-4小时
                 ob.score = ob.score +3  #信誉积分加3
+                ob.save()
             else:  #一小时
                 ob.score = ob.score +1
+                ob.save()
             return JsonResponse(objreturn)
         except:
             objreturn['status'] = 4
@@ -203,7 +210,7 @@ def rent(request):
 def renew(request):
     user=request.POST.get('No')
     getid = list(User.objects.values().filter(number=user))[0]['id']
-    end_time0 = request.POST.get('end_time')
+    end_time0 = int(request.POST.get('end_time'))
 
     objreturn = {}
     recordsearch=models.Rent.objects.values().filter(user_number_id=getid,status=0)
@@ -232,15 +239,19 @@ def renew(request):
                     i = i + 1
                 if flag == 1:
                     objreturn['status'] = 1
-                    '''续约部分，增加信誉积分计算'''
-                    ob = models.Credit.objects.filter(user_number_id=user)
-                    if (end_time0 - st) >= 5:  # 5小时以上
-                        ob.score = ob.score + 5  # 信誉积分加5
-                    elif (end_time0 - st) >= 2:  # 2-4小时
-                        ob.score = ob.score + 3  # 信誉积分加3
-                    else:  # 一小时
-                        ob.score = ob.score + 1
                     return JsonResponse(objreturn)
+            '''续约部分，增加信誉积分计算'''
+            ob = Credit.objects.get(user_number_id=getid)
+            st = int(list(recordsearch)[0]['end_time'])
+            if (end_time0 - st) >= 5:  # 5小时以上
+                ob.score = ob.score + 5  # 信誉积分加5
+                ob.save()
+            elif (end_time0 - st) >= 2:  # 2-4小时
+                ob.score = ob.score + 3  # 信誉积分加3
+                ob.save()
+            else:  # 一小时
+                ob.score = ob.score + 1
+                ob.save()
             objreturn['status'] = 0
             recordsearch.update(end_time=end_time0)
         else:
