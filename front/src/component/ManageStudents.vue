@@ -15,13 +15,13 @@
           >查询</el-button>
         </div>
         <el-main>
-          <el-container style="height: 150px; border: 1px solid #eee">
+          <el-container style="height: 100px; border: 1px solid #eee">
             <el-header style="text-align: center; font-size: 12px">
               <h3>预约结果</h3>
             </el-header>
             <div>
               <el-table
-                style="width: 493%; height: 72px; font-size: 13px; line-height: 0px;"
+                style="width: 493%; height: 150px; font-size: 13px;"
                 :data="rent_record"
                 border
                 stripe
@@ -38,6 +38,8 @@
               </el-table>
             </div>
           </el-container>
+          <br>
+          <br>
           <div style="height: 174px; border: 1px solid rgb(238, 238, 238);">
             <div style="text-align: center; font-size: 12px;top-padding:10px;">
               <h3>图书馆空座情况</h3>
@@ -79,15 +81,35 @@
                 <div class="grid-content" v-for="rowNum in row">
                   {{rowNum}}.
                   <!--对应desk_id:rowNum*5+46-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor3_row1(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+47-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor3_row2(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+48-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor3_row3(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+49-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor3_row4(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+50-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor3_row5(rowNum)"></i>
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor3_row1(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+47-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor3_row2(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+48-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor3_row3(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+49-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor3_row4(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+50-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor3_row5(rowNum)"
+                  ></i>
                 </div>
                 <p style="text-align:center;">第三层</p>
               </el-col>
@@ -95,15 +117,35 @@
                 <div class="grid-content" v-for="rowNum in row">
                   {{rowNum}}.
                   <!--对应desk_id:rowNum*5+71-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor4_row1(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+72-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor4_row2(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+73-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor4_row3(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+74-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor4_row4(rowNum)"></i>
-                <!--对应desk_id:rowNum*5+75-->
-                <i class="el-icon-reading" style="width:20px;" :id="generateId_floor4_row5(rowNum)"></i>
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor4_row1(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+72-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor4_row2(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+73-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor4_row3(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+74-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor4_row4(rowNum)"
+                  ></i>
+                  <!--对应desk_id:rowNum*5+75-->
+                  <i
+                    class="el-icon-reading"
+                    style="width:20px;"
+                    :id="generateId_floor4_row5(rowNum)"
+                  ></i>
                 </div>
                 <p style="text-align:center;">第四层</p>
               </el-col>
@@ -132,8 +174,10 @@ export default {
       flag: false, // 是否查询成功
       imageUrl: imageU,
       message: [], // 全部座位信息，数组形式
-      rent_record: [], //账户预约记录
-      colorStatus:[],   //保存对应每个座位的颜色信息，如：[{desk_id:1,color:'red'},{desk_id:2,color:'green'},...]
+      rent_record: [
+
+      ], //账户预约记录
+      colorStatus: [], //保存对应每个座位的颜色信息，如：[{desk_id:1,color:'red'},{desk_id:2,color:'green'},...]
       row: [1, 2, 3, 4, 5]
     };
   },
@@ -144,116 +188,110 @@ export default {
         .then(result => {
           if (result.body.status === 0 || result.body.status === 1) {
             //查询成功
-            this.flag= true;
+            this.flag = true;
             console.log(result.body.rent);
             this.message = result.body.message;
             this.rent_record = result.body.rent;
             console.log(this.rent_record);
             this.getColorStatus();
             this.changeColor();
-          } 
-          else {
-            this.flag=false;
+          } else {
+            this.flag = false;
             alert("查询失败！");
           }
         });
     },
-    getColorStatus(){
-      if(!this.flag){
-          return;
-        }
-
-        for(var i=0;i<this.message.length;i++){
-          if(this.message[i].rent_state==1){// 若unavailable则标红
-            var tmp={"desk_id":this.message[i].desk_id,"color":'red'};
+    getColorStatus() {
+      if (!this.flag) {
+        return;
+      }
+      for (var i = 0; i < this.message.length; i++) {
+        if (this.message[i].rent_state == 1) {
+          // 若unavailable则标红
+          var tmp = { desk_id: this.message[i].desk_id, color: "#F56C6C" };
+          this.colorStatus.push(tmp);
+        } else {
+          if (this.message[i].plug_state == 0) {
+            //若有插座则标绿
+            var tmp = { desk_id: this.message[i].desk_id, color: "#67C23A" };
+            this.colorStatus.push(tmp);
+          } else {
+            // 若无插座则标白
+            var tmp = { desk_id: this.message[i].desk_id, color: "#FFFFFF" };
             this.colorStatus.push(tmp);
           }
-          else{
-            if(this.message[i].plug_state==0){
-              //若有插座则标绿
-              var tmp={'desk_id':this.message[i].desk_id,'color':'green'};
-              this.colorStatus.push(tmp);
-            }
-            else{
-              // 若无插座则标白
-              var tmp={'desk_id':this.message[i].desk_id,'color':'yellow'};
-              this.colorStatus.push(tmp);
-            }
-          }
         }
-        for(var i=0;i<this.colorStatus.length;i++){
-        console.log(this.colorStatus[i]);
-        }
-    },
-    changeColor(){
-      alert('before change!');
-      // 第i个id对应colorStatus里第i个对象
-      for(var i=1;i<this.colorStatus.length;i++){
-      document.getElementById(i).style.color=this.colorStatus[i].color;
       }
-      alert('changed!');
     },
-    generateId_floor1_row1(index){
-      return index*5-4;
+    changeColor() {
+      alert("before change!");
+      // 第i个id对应colorStatus里第i个对象
+      for (var i = 1; i < this.colorStatus.length + 1; i++) {
+        document.getElementById(i).style.color = this.colorStatus[i - 1].color;
+      }
+      alert("changed!");
     },
-    generateId_floor1_row2(index){
-      return index*5-3;
+    generateId_floor1_row1(index) {
+      return index * 5 - 4;
     },
-    generateId_floor1_row3(index){
-      return index*5-2;
+    generateId_floor1_row2(index) {
+      return index * 5 - 3;
     },
-    generateId_floor1_row4(index){
-      return index*5-1;
+    generateId_floor1_row3(index) {
+      return index * 5 - 2;
     },
-    generateId_floor1_row5(index){
-      return index*5;
+    generateId_floor1_row4(index) {
+      return index * 5 - 1;
     },
-    generateId_floor2_row1(index){
-      return index*5+21;
+    generateId_floor1_row5(index) {
+      return index * 5;
     },
-    generateId_floor2_row2(index){
-      return index*5+22;
+    generateId_floor2_row1(index) {
+      return index * 5 + 21;
     },
-    generateId_floor2_row3(index){
-      return index*5+23;
+    generateId_floor2_row2(index) {
+      return index * 5 + 22;
     },
-    generateId_floor2_row4(index){
-      return index*5+24;
+    generateId_floor2_row3(index) {
+      return index * 5 + 23;
     },
-    generateId_floor2_row5(index){
-      return index*5+25;
+    generateId_floor2_row4(index) {
+      return index * 5 + 24;
     },
-    generateId_floor3_row1(index){
-      return index*5+46;
+    generateId_floor2_row5(index) {
+      return index * 5 + 25;
     },
-    generateId_floor3_row2(index){
-      return index*5+47;
+    generateId_floor3_row1(index) {
+      return index * 5 + 46;
     },
-    generateId_floor3_row3(index){
-      return index*5+48;
+    generateId_floor3_row2(index) {
+      return index * 5 + 47;
     },
-    generateId_floor3_row4(index){
-      return index*5+49;
+    generateId_floor3_row3(index) {
+      return index * 5 + 48;
     },
-    generateId_floor3_row5(index){
-      return index*5+50;
+    generateId_floor3_row4(index) {
+      return index * 5 + 49;
     },
-    generateId_floor4_row1(index){
-      return index*5+71;
+    generateId_floor3_row5(index) {
+      return index * 5 + 50;
     },
-    generateId_floor4_row2(index){
-      return index*5+72;
+    generateId_floor4_row1(index) {
+      return index * 5 + 71;
     },
-    generateId_floor4_row3(index){
-      return index*5+73;
+    generateId_floor4_row2(index) {
+      return index * 5 + 72;
     },
-    generateId_floor4_row4(index){
-      return index*5+74;
+    generateId_floor4_row3(index) {
+      return index * 5 + 73;
     },
-    generateId_floor4_row5(index){
-      return index*5+75;
+    generateId_floor4_row4(index) {
+      return index * 5 + 74;
+    },
+    generateId_floor4_row5(index) {
+      return index * 5 + 75;
     }
-    }
+  }
 };
 </script>
 
@@ -289,7 +327,6 @@ export default {
   text-shadow: 5px 5px 5px #ff0000;
   font-family: "楷体";
 }
-
 
 .el-row {
   margin-bottom: 20px;
