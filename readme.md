@@ -40,7 +40,7 @@ python manage.py createsuperuser  #创建超级用户
 python manage.py runserver 8000
 ```
 
-### 6.在浏览器输入http://127.0.0.1:8000/credit/insert生成山鼠user.py中新增的用户的积分信息，
+### 6.在浏览器输入 http://127.0.0.1:8000/credit/insert 生成user.py中新增的用户的积分信息
 
 ### 7.项目初始化完成
 
