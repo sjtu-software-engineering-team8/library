@@ -18,8 +18,8 @@ for num in range(1, 30):
     sh = hash_code(password1)
     email = str(num)+'@qq.com'
     time = '2020-04-10 08:46:21.533721'
-    sql = "insert into user (name,number,password,email,identity,c_time) values ('" + \
-        username+"',"+number+",'"+sh+"','"+email+"','student','"+time+"')"
+    sql = "insert into user (name,number,password,email,identity,c_time,has_confirmed) values ('" + \
+        username+"',"+number+",'"+sh+"','"+email+"','student','"+time+"',True)"
 
     cur.execute(sql)
     user1.db.commit()

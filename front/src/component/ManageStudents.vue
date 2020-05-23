@@ -28,9 +28,7 @@
                 fit="false"
                 show-header="false"
               >
-                <el-table-column label="座位号" prop="desk_number" width="100"></el-table-column>
-                <el-table-column label="楼层号" prop="floor" width="180"></el-table-column>
-                <el-table-column label="插座情况" prop="plug_state"></el-table-column>
+                <el-table-column label="座位号" prop="desk_number_id_id" width="100"></el-table-column>
                 <el-table-column label="开始时间" prop="start_time"></el-table-column>
                 <el-table-column label="结束时间" prop="end_time"></el-table-column>
                 <el-table-column label="预约日期" prop="date"></el-table-column>
@@ -38,9 +36,9 @@
               </el-table>
             </div>
           </el-container>
-          <br>
-          <br>
-          <div style="height: 174px; border: 1px solid rgb(238, 238, 238);">
+          <br />
+          <br />
+          <div style="height: 174px; border: 1px solid rgb(238, 238, 238);margin-top:70px">
             <div style="text-align: center; font-size: 12px;top-padding:10px;">
               <h3>图书馆空座情况</h3>
             </div>
@@ -166,17 +164,14 @@
 </template>
 
 <script>
-import imageU from "../img/seatIcon.jpg";
 export default {
   name: "manageStudents",
   data() {
     return {
       flag: false, // 是否查询成功
-      imageUrl: imageU,
-      message: [], // 全部座位信息，数组形式
-      rent_record: [
 
-      ], //账户预约记录
+      message: [], // 全部座位信息，数组形式
+      rent_record: [], //账户预约记录
       colorStatus: [], //保存对应每个座位的颜色信息，如：[{desk_id:1,color:'red'},{desk_id:2,color:'green'},...]
       row: [1, 2, 3, 4, 5]
     };

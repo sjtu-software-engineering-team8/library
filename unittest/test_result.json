@@ -1,0 +1,233 @@
+{
+	"id": "672fae37-0927-4fe9-b8d0-dd052a3a36ae",
+	"name": "test",
+	"timestamp": "2020-05-17T01:59:33.815Z",
+	"collection_id": "7634458d-bd81-4d92-9600-912fa8908346",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 15,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "7cfbb786-c766-4f06-8b0e-17c5e860db89",
+			"name": "验证接口",
+			"url": "http://127.0.0.1:8000/confirm1",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"接口状态码200": true,
+				"返回时间小于1000毫秒": true,
+				"status码必须为0": true
+			},
+			"testPassFailCounts": {
+				"接口状态码200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"返回时间小于1000毫秒": {
+					"pass": 1,
+					"fail": 0
+				},
+				"status码必须为0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"接口状态码200": true,
+					"返回时间小于1000毫秒": true,
+					"status码必须为0": true
+				}
+			]
+		},
+		{
+			"id": "19346c5c-82ee-4b31-86a3-7a68a73c4fdf",
+			"name": "预约接口",
+			"url": "http://127.0.0.1:8000/seats/rent",
+			"time": 206,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"接口状态码200": true,
+				"返回时间小于1000毫秒": true,
+				"code码必须为0": true
+			},
+			"testPassFailCounts": {
+				"接口状态码200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"返回时间小于1000毫秒": {
+					"pass": 1,
+					"fail": 0
+				},
+				"code码必须为0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				206
+			],
+			"allTests": [
+				{
+					"接口状态码200": true,
+					"返回时间小于1000毫秒": true,
+					"code码必须为0": true
+				}
+			]
+		},
+		{
+			"id": "478d88fb-a93f-432a-9314-93083b3f5193",
+			"name": "续约接口",
+			"url": "http://127.0.0.1:8000/seats/renew",
+			"time": 230,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"接口状态码200": true,
+				"返回时间小于1000毫秒": true,
+				"status码必须为0": true
+			},
+			"testPassFailCounts": {
+				"接口状态码200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"返回时间小于1000毫秒": {
+					"pass": 1,
+					"fail": 0
+				},
+				"status码必须为0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				230
+			],
+			"allTests": [
+				{
+					"接口状态码200": true,
+					"返回时间小于1000毫秒": true,
+					"status码必须为0": true
+				}
+			]
+		},
+		{
+			"id": "f9d8d558-d004-429f-9982-b52c1d0a60c5",
+			"name": "查询接口",
+			"url": "http://127.0.0.1:8000/seats/search?No=1",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"接口状态码200": true,
+				"返回时间小于1000毫秒": true,
+				"status码必须为0": true
+			},
+			"testPassFailCounts": {
+				"接口状态码200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"返回时间小于1000毫秒": {
+					"pass": 1,
+					"fail": 0
+				},
+				"status码必须为0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"接口状态码200": true,
+					"返回时间小于1000毫秒": true,
+					"status码必须为0": true
+				}
+			]
+		},
+		{
+			"id": "9ed8241f-4222-4010-b942-b7710839b3ba",
+			"name": "取消接口",
+			"url": "http://127.0.0.1:8000/seats/cancel",
+			"time": 297,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"接口状态码200": true,
+				"返回时间小于1000毫秒": true,
+				"status码必须为0": true
+			},
+			"testPassFailCounts": {
+				"接口状态码200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"返回时间小于1000毫秒": {
+					"pass": 1,
+					"fail": 0
+				},
+				"status码必须为0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				297
+			],
+			"allTests": [
+				{
+					"接口状态码200": true,
+					"返回时间小于1000毫秒": true,
+					"status码必须为0": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 759,
+	"collection": {
+		"requests": [
+			{
+				"id": "7cfbb786-c766-4f06-8b0e-17c5e860db89",
+				"method": "POST"
+			},
+			{
+				"id": "19346c5c-82ee-4b31-86a3-7a68a73c4fdf",
+				"method": "POST"
+			},
+			{
+				"id": "478d88fb-a93f-432a-9314-93083b3f5193",
+				"method": "POST"
+			},
+			{
+				"id": "f9d8d558-d004-429f-9982-b52c1d0a60c5",
+				"method": "GET"
+			},
+			{
+				"id": "9ed8241f-4222-4010-b942-b7710839b3ba",
+				"method": "POST"
+			}
+		]
+	}
+}
