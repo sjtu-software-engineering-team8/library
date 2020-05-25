@@ -137,7 +137,7 @@ def cancel(request):
     return JsonResponse(objreturn)
 
 def rent(request):
-    #status 输入数据有误 ；20：预约成功 ；1：：已有其他预约记录 ；3：已被他人预约；4：输入未完整
+    #status 0:预约成功 ;1:已有其他预约记录 ;3:已被他人预约;4：输入未完整或者输入数据有误
     userno = request.POST.get('No')
     getid = list(User.objects.values().filter(number=userno))[0]['id']
     desk_number = int(request.POST.get('desk_number'))
