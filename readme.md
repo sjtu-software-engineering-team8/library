@@ -1,5 +1,7 @@
 # 软工第八组的项目
 
+##### 注释：本项目采用的python版本需要大于3.6，采用anaconda环境，django版本为2.x，如果不适用anaconda环境需要在下面步骤3之前使用pip安装一些依赖包
+
 ### 1. front文件夹为前端vue.js的项目
 
 ### 2. rear文件夹为后端django项目
