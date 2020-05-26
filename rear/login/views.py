@@ -60,6 +60,12 @@ def register(request):
                 message = "两次输入的密码不同！"
                 return render(request, 'login/register.html', locals())
             else:
+                if len(password1)<8:  #新增了长度判断
+                    message = '密码长度必须大于等于8位！请重新设置密码'
+                    return render(request, 'login/register.html', locals())
+                if alphabet(password1) :  #新增了字母判断
+                    message = '密码必须至少包含一个字母！'
+                    return render(request, 'login/register.html', locals())
                 same_number_user = models.User.objects.filter(number=number)
                 if same_number_user:  # 学号/工号唯一
                     message = '用户已经存在，请重新选择用户名！'
@@ -87,6 +93,12 @@ def register(request):
     register_form = RegisterForm()
     return render(request, 'login/register.html', locals())
 
+#一个辅助判断函数
+def alphabet(password):     #密码必须包含字母
+    for i in password:
+        if (i>="a" and i <="z") or (i>="A" and i <="Z") :   #大小写不连续
+            return 0    #只要扫描到一位不是数字就返回0，ok
+    return 1
 
 def user_confirm(request):
     if request.method == "POST":
